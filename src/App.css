@@ -15,7 +15,7 @@
   flex-direction: column;
   color: white;
   padding: 0rem 10rem;
-  background-color: #0c172b;
+  background-color: #757575;
 }
 
 .app-tittle {
@@ -46,6 +46,7 @@
   height: 50px;
   padding: 5px 5px 10px;
   color: #fff;
+  border-color: #fff;
   outline: none;
   background: transparent;
   margin-right: 3rem;
@@ -63,15 +64,15 @@
   padding: 1.25rem;
   color: white;
   outline: none;
-  background-color: crimson;
+  background-color: #f0a62e;
   cursor: pointer;
   border-radius: 0.5rem;
   box-sizing: border-box;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .submit-button:hover {
-  background-color: #d40c2d;
+  background-color: #d8901d;
 }
 
 .weather-card {
@@ -82,4 +83,13 @@
   border-radius: 2rem;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
+}
+
+.wheater-svg {
+  width: 50rem;
+  top: 5rem;
+  right: 1.5rem;
+  transform: rotate(4deg);
+  position: absolute;
+  color: #f0a500;
 }

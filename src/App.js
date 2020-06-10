@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import weatherSVG from './weather.svg';
+
 import './App.css';
 
 const App = () => {
@@ -11,9 +14,20 @@ const App = () => {
   const weatherAPIKey = 'ec89f27012340ab7a567a36736754331';
 
   function searchCity() {
-    const cityEl = document.getElementById('city');
-    errorMessage('');
-    setSearch(cityEl.value);
+    const cityEl = document.getElementById('city').value;
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${cityEl}&appid=${weatherAPIKey}`
+      )
+      .then(response => {
+        setIconUrl(
+          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
+        );
+        setCityWeather(response.data);
+      })
+      .catch(function (erro) {
+        errorMessage('Please search for a valid city');
+      });
   }
 
   function errorMessage(erro) {
@@ -25,34 +39,31 @@ const App = () => {
     return Math.round(temp - 273.15);
   }
 
-  function clearWeather() {
-    document.getElementById('appWeather').innerHTML = '';
-  }
-
   useEffect(() => {
-    if (search === '') return;
-    axios
-      .get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${weatherAPIKey}`
-      )
-      .then(response => {
-        const city = response.data;
-        console.log(response.data);
-        setIconUrl(
-          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
-        );
-        setCityWeather(city);
-      })
-      .catch(function (erro) {
-        errorMessage('Please search for a valid city');
-      });
-  }, [search]);
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+      axios
+        .get(
+          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}`
+        )
+        .then(response => {
+          document.getElementById('city').value = response.data.name;
+          setIconUrl(
+            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
+          );
+          setCityWeather(response.data);
+        });
+    });
+  }, []);
 
   return (
     <section className="app">
       <span className="made-by">
         Made with <span>❤</span> by Jean Kistenmacher
       </span>
+
+      <img src={weatherSVG} className="wheater-svg" alt="Weather image" />
+
       <div className="app-tittle">
         <h1>Simple Weather App</h1>
       </div>
