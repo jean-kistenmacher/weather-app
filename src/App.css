@@ -1,0 +1,85 @@
+.made-by {
+  padding: 1rem;
+  text-align: end;
+  font-size: 1.5rem;
+  font-family: Balsamiq Sans;
+}
+
+.made-by span {
+  color: crimson;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 0rem 10rem;
+  background-color: #0c172b;
+}
+
+.app-tittle {
+  font-size: 5rem;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  padding: 10rem 0rem 5rem;
+}
+
+.app-form {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+
+.error-message {
+  position: absolute;
+  font-size: 1.5rem;
+  top: 6rem;
+}
+
+.search-field {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 3rem;
+  font-weight: 500;
+  height: 50px;
+  padding: 5px 5px 10px;
+  color: #fff;
+  outline: none;
+  background: transparent;
+  margin-right: 3rem;
+}
+
+.search-field::placeholder {
+  color: #fff;
+}
+
+.submit-button {
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  padding: 1.25rem;
+  color: white;
+  outline: none;
+  background-color: crimson;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: #d40c2d;
+}
+
+.weather-card {
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+  margin-top: 5rem;
+  border-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
