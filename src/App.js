@@ -17,12 +17,12 @@ const App = () => {
       const { latitude, longitude } = position.coords;
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}`
         )
         .then(response => {
           document.getElementById('city').value = response.data.name;
           setIconUrl(
-            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
+            `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
           );
           setCityWeather(response.data);
         });
@@ -34,7 +34,7 @@ const App = () => {
     errorMessage('');
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${cityEl}&appid=${weatherAPIKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityEl}&appid=${weatherAPIKey}`
       )
       .then(response => {
         setIconUrl(
