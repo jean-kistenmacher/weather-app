@@ -1,0 +1,14 @@
+{
+  "short_name": "Weather App",
+  "name": "Simple Weather App",
+  "icons": [
+    {
+      "src": "wheater-icon.svg",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
