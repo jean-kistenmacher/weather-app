@@ -6,8 +6,8 @@
 
 ## Built With
 
-* [React](https://reactjs.org/) - The web framework used
-* [OpenWeather](https://openweathermap.org/) - The weather API used
+* [React](https://reactjs.org/) -  A JavaScript library for building user interfaces
+* [OpenWeather](https://openweathermap.org/) - A RESTful Weather API
 * [Axios](https://github.com/axios/axios) - Used for HTTP requests
 
 ## Getting started with the app
