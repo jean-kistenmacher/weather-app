@@ -8,13 +8,30 @@ import weatherSVG from './weather.svg';
 import './App.css';
 
 const App = () => {
-  const [search, setSearch] = useState('');
   const [iconUrl, setIconUrl] = useState('');
   const [cityWeather, setCityWeather] = useState({});
   const weatherAPIKey = 'ec89f27012340ab7a567a36736754331';
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+      axios
+        .get(
+          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}`
+        )
+        .then(response => {
+          document.getElementById('city').value = response.data.name;
+          setIconUrl(
+            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
+          );
+          setCityWeather(response.data);
+        });
+    });
+  }, []);
+
   function searchCity() {
     const cityEl = document.getElementById('city').value;
+    errorMessage('');
     axios
       .get(
         `http://api.openweathermap.org/data/2.5/weather?q=${cityEl}&appid=${weatherAPIKey}`
@@ -35,37 +52,16 @@ const App = () => {
     error.innerHTML = erro;
   }
 
-  function getTemp(temp) {
-    return Math.round(temp - 273.15);
-  }
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords;
-      axios
-        .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}`
-        )
-        .then(response => {
-          document.getElementById('city').value = response.data.name;
-          setIconUrl(
-            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
-          );
-          setCityWeather(response.data);
-        });
-    });
-  }, []);
-
   return (
     <section className="app">
       <span className="made-by">
         Made with <span>❤</span> by Jean Kistenmacher
       </span>
 
-      <img src={weatherSVG} className="wheater-svg" alt="Weather image" />
+      <img src={weatherSVG} className="wheater-svg" alt="Weather symbol" />
 
       <div className="app-tittle">
-        <h1>Simple Weather App</h1>
+        <h1>Weather App</h1>
       </div>
       <div className="app-form">
         <input
@@ -84,9 +80,35 @@ const App = () => {
       <div id="appWeather">
         {cityWeather && cityWeather.main && (
           <div className="weather-card">
-            <img src={iconUrl} alt="Weather icon"></img>
-            <span>{cityWeather.name} </span>
-            <span> / {getTemp(cityWeather.main.temp)}º</span>
+            <img src={iconUrl} alt="Weather icon" />
+            <div className="weather">
+              <div className="city-info">
+                <span className="city-name">{cityWeather.name}</span>
+                <span className="city-temp">
+                  {Math.round(cityWeather.main.temp - 273.15)}º
+                </span>
+              </div>
+              <hr></hr>
+
+              <div className="weather-info">
+                <span className="sub-info">
+                  Feels Like: {Math.round(cityWeather.main.feels_like - 273.15)}
+                  º
+                </span>
+                <span className="sub-info">
+                  Winds: {Math.round(cityWeather.wind.speed * 3.6)}
+                  <span className="unity">k/h</span>
+                </span>
+                <span className="sub-info">
+                  Humidity: {cityWeather.main.humidity}
+                  <span className="unity">%</span>
+                </span>
+                <span className="sub-info">
+                  Clouds: {cityWeather.clouds.all}
+                  <span className="unity">%</span>
+                </span>
+              </div>
+            </div>
           </div>
         )}
       </div>

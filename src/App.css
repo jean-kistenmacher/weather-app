@@ -28,6 +28,7 @@
 .app-form {
   display: flex;
   position: relative;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -77,7 +78,10 @@
 
 .weather-card {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-start;
   font-size: 4rem;
   margin-top: 5rem;
   border-radius: 2rem;
@@ -91,5 +95,110 @@
   right: 1.5rem;
   transform: rotate(4deg);
   position: absolute;
-  color: #f0a500;
+}
+
+.weather {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0rem 2rem;
+}
+
+.city-info {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  font-size: 5rem;
+}
+.weather-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.city-name {
+  margin-right: 2rem;
+}
+.city-temp {
+  font-weight: bold;
+}
+
+.sub-info {
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+
+.unity {
+  margin-left: 0.3rem;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1255px) {
+  .wheater-svg {
+    width: 40rem;
+    top: 10rem;
+    right: 1.5rem;
+  }
+}
+@media screen and (max-width: 1060px) {
+  .wheater-svg {
+    width: 30rem;
+    top: 16rem;
+    right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .wheater-svg {
+    width: 25rem;
+    top: 20rem;
+    right: 1.5rem;
+  }
+  .weather-card {
+    justify-content: center;
+  }
+  .weather {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .wheater-svg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .city-info {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .submit-button {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .search-field {
+    margin: 0;
+  }
+  .app-form {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .app {
+    padding: 0rem 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-field {
+    font-size: 2.2rem;
+  }
 }
